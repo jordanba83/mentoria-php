@@ -36,7 +36,7 @@ else{
 
 // Tarefa 2: Validar se email contém "@"
 // Dica: use strpos()
-if(strpos($email,"") !== false){
+if(strpos($email,"@") !== false){
     echo"Email valido!<br>";
 }
 else{
@@ -52,7 +52,7 @@ else{
 }
 // Tarefa 4: Validar senha (pelo menos 6 caracteres)
 // Dica: use strlen() novamente
-if(strlen($senha >= 6)){
+if(strlen($senha)>= 6){
     echo "Senha valida<br>";
 }
 else{
@@ -60,12 +60,32 @@ else{
 }
 
 // Tarefa 5: Classificar saldo:
-    
+    echo"Classificação do saldo:<br>";
+    if($saldo < 1000){
+        echo"Saldo baixo (menor que R$1000)<br>";
+    }
+    elseif($saldo >= 1000 && $saldo <= 5000){
+        echo "Saldo médio (entre R$1000 e R$5000)<br>";
+    }
+    else{
+        echo "Saldo alto, você está com as mufufas!!!<br>";
+    }
 // - Abaixo de R$1000: "Baixo"
 // - Entre R$1000 e R$5000: "Médio"
 // - Acima de R$5000: "Alto"
 
 // Tarefa 6: Mostrar status completo:
+echo "Status final usuário<br>";
+$nome_valido = strlen($nome)>=3;
+$email_valido = strpos($email,"@") ==! false;
+$idade_valida = $idade >= 18 && $idade <= 100;
+$senha_valida = strlen($senha)>= 6;
+if($ativp && $nome_valido && $email_valido && $senha_valida && $idade_valida){
+    echo "<strong>USUÁRIO VÁLIDO!</strong> Pode proseguir<br>";
+}
+else{
+    
+}
 // Se ativo=true E todas validações OK: "Usuário válido"
 // Caso contrário: "Usuário com problemas"
 
