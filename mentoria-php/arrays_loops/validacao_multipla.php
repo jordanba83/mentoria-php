@@ -46,14 +46,14 @@ foreach($usuarios as $usuario) {
 
 
 
-if(strlen($usuario['nome']) >= 3){
+if(validarNome($usuario['nome'])){
     echo"Nome validos<br>";
 
 }
 else{
     echo"Nome invalidos deve ter pelo menos 3 caracteres!<br>";
 }
-if(strpos($usuario['email'],'@') !== false){
+if(validarEmail($usuario['email'])){
     echo"Email validos<br>";
 
 }
@@ -61,14 +61,14 @@ else{
     echo"Email invalidos<br>";
 }
 
-if($usuario['idade'] >= 18 && $usuario['idade'] <= 100){
-    echo"Idade validos<br>";
+if(validarIdade($usuario['idade'])){
+    echo"Idade valida<br>";
 
 }
 else{
     echo"Idade invalidos deve ter entre 18 e 100 anos!<br>";
 }
-if(strlen($usuario['senha']) >= 6){
+if(validarSenha($usuario['senha'])){
     echo"Senha validos<br>";
 
 }
@@ -85,10 +85,10 @@ else{
     echo"saldo alto, ta portando o malote rs!!<br>";
 }
 $aprovado = $usuario['ativo'] &&
-            strlen($usuario['nome']) >= 3 &&
-            strpos($usuario['email'],'@') !== false &&
-            $usuario['idade'] >= 18 && $usuario['idade'] <= 100 &&
-            strlen($usuario['senha']) >= 6;
+            validarNome($usuario['nome']) &&
+            validarEmail($usuario['email']) &&
+            validarIdade($usuario['idade']) &&
+            validarSenha($usuario['senha']);
 if($aprovado){
     echo"Usuario aprovado para acesso!<br>";   
 }
@@ -98,4 +98,21 @@ else{
 }
 echo "=== Analise concluida ===<br>";
 echo "<br>===Fim do Sistema===";
+
+
+function validarEmail($email){
+    return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+}
+function validarSenha($senha){
+    return strlen($senha) >= 6;
+}
+    
+    function validarNome($nome){
+        return strlen($nome) >= 3;
+    }
+    
+    function validarIdade($idade){
+        return $idade >= 18 && $idade <= 100;
+    }
+
 ?>
